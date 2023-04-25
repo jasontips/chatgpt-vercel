@@ -188,8 +188,8 @@ export async function fetchBilling(key: string): Promise<Billing> {
 
     // 设置API请求URL和请求头
     const urlSubscription =
-      "https://api.openai.com/v1/dashboard/billing/subscription" // 查是否订阅
-    const urlUsage = `https://api.openai.com/v1/dashboard/billing/usage?start_date=${formatDate(
+      "https://${baseURL}/v1/dashboard/billing/subscription" // 查是否订阅
+    const urlUsage = `https://${baseURL}/v1/dashboard/billing/usage?start_date=${formatDate(
       startDate
     )}&end_date=${formatDate(endDate)}` // 查使用量
     const headers = {
