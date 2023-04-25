@@ -50,7 +50,7 @@ const timeout = isNaN(+process.env.TIMEOUT!)
 
 const passwordSet = process.env.PASSWORD || defaultEnv.PASSWORD
 
-export async function POST({ request }: APIEvent) {
+export async function POST(request: Request) {
   try {
     const body: {
       messages?: ChatMessage[]
@@ -101,13 +101,9 @@ export async function POST({ request }: APIEvent) {
           Authorization: `Bearer ${apiKey}`
         },
         timeout,
-        method: "POST",
-        body: JSON.stringify({
-          model: model,
-          messages: messages.map(k => ({ role: k.role, content: k.content })),
-          temperature,
-          stream: true
-        })
+        method: request.method,
+        body: request.body,
+        redirect: "follow"
       }
     ).catch((err: { message: any }) => {
       return new Response(
